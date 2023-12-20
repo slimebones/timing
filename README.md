@@ -1,1 +1,3 @@
 # 🕑 Timing
+
+Track your time.
