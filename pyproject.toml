@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "slimebones.timing"
+name = "slimebones-timing"
 version = "0.1.0"
 description = ""
 authors = ["ryzhovalex <thed4rkof@gmail.com>"]
