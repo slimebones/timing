@@ -1,22 +1,28 @@
 import argparse
 import asyncio
-import os
-from pathlib import Path
+import subprocess
 import sys
-import time
+from pathlib import Path
+
 from pydub import AudioSegment
 from pydub.playback import play
 
 
+def _clear_console():
+    subprocess.call("/usr/bin/clear")
+
+
 async def _print_time_passed(start: int):
-    assert start > 0
+    if start < 1:
+        raise ValueError
 
     for remaining in range(start, 0, -1):
         sys.stdout.write("\r")
-        sys.stdout.write("{:2d} seconds remaining.".format(remaining))
+        sys.stdout.write(f"{remaining:2d} seconds remaining.")
         sys.stdout.flush()
         await asyncio.sleep(1)
-    os.system("clear")
+
+    _clear_console()
 
 
 async def _entry():
@@ -27,7 +33,7 @@ async def _entry():
 
     await _print_time_passed(args.start)
 
-    print("CHILL TIME")
+    print("CHILL TIME")  # noqa: T201
     bellsound = AudioSegment.from_file(args.endsound)
     play(bellsound)
 
